@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  predict-installs-service:
+    container_name: predict-installs-service
+    image: predict-installs-service::latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+
