@@ -13,6 +13,10 @@ with open(filename, "rb") as f:
 app = FastAPI()
 
 
+@app.get("/test")
+async def test():
+    return "Hello World!"
+    
 @app.post('/predict')
 async def predict(features: ModelFeatures):
     try:
