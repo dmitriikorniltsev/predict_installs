@@ -19,10 +19,10 @@ async def test():
     
 # @app.post('/api/predict')
 @app.get('/api/predict')
-async def predict(features: ModelFeatures):
+async def predict(features):
     try:
-        input_data = np.array(list(features.model_dump().values())).reshape(1, -1)
-        
+        # input_data = np.array(list(features.model_dump().values())).reshape(1, -1)
+        input_data = np.array(list(features.values())).reshape(1, -1)
         predicted_installs = model.predict(input_data)
         
         return {
