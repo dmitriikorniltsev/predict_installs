@@ -18,8 +18,20 @@ async def test():
     return "Hello World!"
     
 # @app.post('/api/predict')
-@app.get('/api/predict')
-async def predict(features: ModelFeatures):
+@app.get('/api/predict_v2')
+async def predict():
+    features = {
+        "Heidelberg": 0.0,
+        "Essen": 0.0,
+        "Dortmund": 0.0,
+        "Ulm": 0.0,
+        "Bergedorf": 0.0,
+        "Wuerzburg": 0.0,
+        "Bottrop": 0.0,
+        "Darmstadt": 0.0,
+        "Goettingen": 0.0,
+        "Recklinghausen": 0.0
+    }
     try:
         input_data = np.array(list(features.model_dump().values())).reshape(1, -1)
         # input_data = np.array(list(features.values())).reshape(1, -1)
@@ -31,11 +43,10 @@ async def predict(features: ModelFeatures):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
-@app.post('/api/predict_v2')
+@app.post('/api/predict')
 async def predict(features: ModelFeatures):
     try:
         input_data = np.array(list(features.model_dump().values())).reshape(1, -1)
-        # input_data = np.array(list(features.values())).reshape(1, -1)
         predicted_installs = model.predict(input_data)
         
         return {
