@@ -33,7 +33,7 @@ async def predict():
     }
     try:
         input_data = np.array(list(features.values())).reshape(1, -1)
-        # input_data = np.array(list(features.values())).reshape(1, -1)
+        input_data = np.array(list(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)).reshape(1, -1)
         predicted_installs = model.predict(input_data)
         
         return {
