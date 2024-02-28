@@ -13,11 +13,11 @@ with open(filename, "rb") as f:
 app = FastAPI()
 
 
-@app.get("/test")
+@app.get("/api/test")
 async def test():
     return "Hello World!"
     
-@app.post('/predict')
+@app.post('/api/predict')
 async def predict(features: ModelFeatures):
     try:
         input_data = np.array(list(features.model_dump().values())).reshape(1, -1)
