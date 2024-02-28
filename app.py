@@ -17,7 +17,6 @@ app = FastAPI()
 async def test():
     return "Hello World!"
     
-# @app.post('/api/predict')
 @app.get('/api/predict_v2')
 async def predict():
     features = {
@@ -33,7 +32,7 @@ async def predict():
         "Recklinghausen": 0.0
     }
     try:
-        input_data = np.array(list(features.model_dump().values())).reshape(1, -1)
+        input_data = np.array(list(features.values())).reshape(1, -1)
         # input_data = np.array(list(features.values())).reshape(1, -1)
         predicted_installs = model.predict(input_data)
         
