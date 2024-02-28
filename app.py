@@ -17,7 +17,8 @@ app = FastAPI()
 async def test():
     return "Hello World!"
     
-@app.post('/api/predict')
+# @app.post('/api/predict')
+@app.get('/api/predict')
 async def predict(features: ModelFeatures):
     try:
         input_data = np.array(list(features.model_dump().values())).reshape(1, -1)
