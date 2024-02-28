@@ -19,10 +19,23 @@ async def test():
     
 # @app.post('/api/predict')
 @app.get('/api/predict')
-async def predict(features):
+async def predict(features: ModelFeatures):
     try:
-        # input_data = np.array(list(features.model_dump().values())).reshape(1, -1)
-        input_data = np.array(list(features.values())).reshape(1, -1)
+        input_data = np.array(list(features.model_dump().values())).reshape(1, -1)
+        # input_data = np.array(list(features.values())).reshape(1, -1)
+        predicted_installs = model.predict(input_data)
+        
+        return {
+            'predicted_installs': predicted_installs.tolist()
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+@app.post('/api/predict_v2')
+async def predict(features: ModelFeatures):
+    try:
+        input_data = np.array(list(features.model_dump().values())).reshape(1, -1)
+        # input_data = np.array(list(features.values())).reshape(1, -1)
         predicted_installs = model.predict(input_data)
         
         return {
