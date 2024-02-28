@@ -6,10 +6,10 @@ from src.data_model import ModelFeatures
 
 
 filename = 'data/model/xgb_model_top_10.sav'
-model = pickle.load(open(filename, 'rb'))
+# model = pickle.load(open(filename, 'rb'))
 
-# with open(filename, "rb") as f:
-#     model = pickle.load(f)
+with open(filename, "rb") as f:
+    model = pickle.load(f)
 
 app = FastAPI()
 
@@ -19,7 +19,7 @@ async def test():
     return "Hello World!"
 
 @app.get("/api/test_predict")
-async def test():
+async def test_predict():
     test_data = {
         'Heidelberg': 86.93,
         'Essen': 0.0,
@@ -56,7 +56,7 @@ async def predict():
         "Recklinghausen": 0.0
     }
     try:
-        input_data = np.array(list(features.values())).reshape(1, -1)
+        # input_data = np.array(list(features.values())).reshape(1, -1)
         input_data = np.array(list(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)).reshape(1, -1)
         predicted_installs = model.predict(input_data)
         
